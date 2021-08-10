@@ -21,7 +21,7 @@ function MealCategoriesScreen(props) {
             style={style.touchStyle}
             onPress={() => onclickAlert(itemData.item.title)}>
             <View style={{ ...style.renderView, ...{ backgroundColor: itemData.item.color } }}>
-               <Text numberOfLines={2} style={style.renderText}>{itemData.item.title}</Text>
+               <Text numberOfLines={2} style={style.renderText}>{itemData.item.title} </Text>
             </View>
          </TouchableNativeFeedback>
       );

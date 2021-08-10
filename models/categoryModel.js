@@ -7,4 +7,4 @@ class Category {
       this.color = color;
    }
 }
-export default Category
+export default Category;
