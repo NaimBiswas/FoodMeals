@@ -29,7 +29,7 @@ function MealCategoriesScreen(props) {
    // main function
    return (
 
-      <View>
+      <View >
          <FlatList showsVerticalScrollIndicator={false} numColumns={2} data={Categoires} renderItem={renderItems} />
       </View>
    );
