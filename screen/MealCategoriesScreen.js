@@ -6,10 +6,17 @@ import { Categoires } from '../data/dummyData';
 
 
 
-function MealCategoriesScreen(props) {
+function MealCategoriesScreen({ navigation }) {
 
-   const onclickAlert = (title) => {
-      Alert.alert('Hey!', `You have clicked on ${title}`, [{ text: 'Okay', style: 'destructive' }]);
+   const onclickAlert = (item) => {
+      const succ = Alert.alert('Hey!', `You have clicked on ${item.title}`, [{ text: 'Okay', style: 'destructive' }]);
+
+      navigation.navigate('Meals', {
+         id: item.id,
+         title: item.title
+      })
+
+
    };
 
 
@@ -19,7 +26,7 @@ function MealCategoriesScreen(props) {
       return (
          <TouchableNativeFeedback
             style={style.touchStyle}
-            onPress={() => onclickAlert(itemData.item.title)}>
+            onPress={() => onclickAlert(itemData.item)}>
             <View style={{ ...style.renderView, ...{ backgroundColor: itemData.item.color } }}>
                <Text numberOfLines={2} style={style.renderText}>{itemData.item.title} </Text>
             </View>

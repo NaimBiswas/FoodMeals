@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
 
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MealCategoriesScreen from './screen/MealCategoriesScreen'
-
+import CategoryMealsScreen from './screen/CategoryMealsScreen'
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
       <NavigationContainer>
          <Stack.Navigator>
             <Stack.Screen name="Home" component={MealCategoriesScreen} options={{
-               title: 'My Home',
+
+               title: 'Welcome',
                headerStyle: {
                   backgroundColor: '#f4511e',
                },
@@ -22,6 +23,18 @@ function App() {
                headerTitleStyle: {
                   fontWeight: 'bold',
                },
+            }} />
+            <Stack.Screen name="Meals" component={CategoryMealsScreen} options={{
+
+               title: 'Meals',
+               headerStyle: {
+                  backgroundColor: '#f4511e',
+               },
+               headerTintColor: '#fff',
+               headerTitleStyle: {
+                  fontWeight: 'bold',
+               },
+
             }} />
          </Stack.Navigator>
       </NavigationContainer>
