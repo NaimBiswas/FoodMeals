@@ -9,11 +9,12 @@ import { Categoires } from '../data/dummyData';
 function MealCategoriesScreen({ navigation }) {
 
    const onclickAlert = (item) => {
-      Alert.alert('Hey!', `You have clicked on ${item.title}`, [{ text: 'Okay', style: 'destructive' }]);
+      // Alert.alert('Hey!', `You have clicked on ${item.title}`, [{ text: 'Okay', style: 'destructive' }]);
 
       navigation.navigate('Meals', {
          id: item.id,
-         title: item.title
+         title: item.title,
+         color: item.color,
       })
 
 

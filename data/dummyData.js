@@ -12,7 +12,7 @@ export const Categoires = [
    new Category('c8', 'Paris Studio', 'This is Description', '#D90B1C'),
    new Category('c9', 'Pakshi Studio', 'This is Description', '#F29F05'),
 
-   new Category('10', 'Chatmohor Studio', 'This is Description', '#184059'),
+   new Category('c10', 'Chatmohor Studio', 'This is Description', '#184059'),
 ];
 
 
