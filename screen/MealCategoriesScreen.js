@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableNativeFeedback, Alert } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableNativeFeedback, Alert, Dimensions, SafeAreaView, StatusBar } from 'react-native';
 import { Categoires } from '../data/dummyData';
 
 
@@ -9,7 +9,7 @@ import { Categoires } from '../data/dummyData';
 function MealCategoriesScreen({ navigation }) {
 
    const onclickAlert = (item) => {
-      const succ = Alert.alert('Hey!', `You have clicked on ${item.title}`, [{ text: 'Okay', style: 'destructive' }]);
+      Alert.alert('Hey!', `You have clicked on ${item.title}`, [{ text: 'Okay', style: 'destructive' }]);
 
       navigation.navigate('Meals', {
          id: item.id,
@@ -35,10 +35,14 @@ function MealCategoriesScreen({ navigation }) {
    };
    // main function
    return (
-
-      <View >
-         <FlatList showsVerticalScrollIndicator={false} numColumns={2} data={Categoires} renderItem={renderItems} />
-      </View>
+      <SafeAreaView>
+         <StatusBar
+            animated={true}
+            backgroundColor="#f4511e" />
+         <View >
+            <FlatList showsVerticalScrollIndicator={false} numColumns={2} data={Categoires} renderItem={renderItems} />
+         </View>
+      </SafeAreaView>
    );
 }
 const style = StyleSheet.create({
@@ -63,6 +67,7 @@ const style = StyleSheet.create({
       shadowOffset: { width: 0, height: 2 },
       shadowRadius: 10,
       elevation: 6,
+
    },
    touchStyle: {
 

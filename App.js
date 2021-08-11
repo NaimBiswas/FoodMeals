@@ -15,7 +15,7 @@ function App() {
          <Stack.Navigator>
             <Stack.Screen name="Home" component={MealCategoriesScreen} options={{
 
-               title: 'Welcome',
+               title: 'My Home',
                headerStyle: {
                   backgroundColor: '#f4511e',
                },
