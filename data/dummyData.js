@@ -11,7 +11,6 @@ export const Categoires = [
    new Category('c7', 'Shatkhira Studio', 'This is Description', '#202731'),
    new Category('c8', 'Paris Studio', 'This is Description', '#D90B1C'),
    new Category('c9', 'Pakshi Studio', 'This is Description', '#F29F05'),
-
    new Category('c10', 'Chatmohor Studio', 'This is Description', '#184059'),
 ];
 
@@ -19,7 +18,7 @@ export const Categoires = [
 export const MEALS = [
    new Meal(
       'm1',
-      ['c1', 'c2'],
+      ['c1', 'c2', 'c3'],
       'Spaghetti with Tomato Sauce',
       'affordable',
       'simple',
@@ -50,7 +49,7 @@ export const MEALS = [
 
    new Meal(
       'm2',
-      ['c2'],
+      ['c2', 'c3'],
       'Toast Hawaii',
       'affordable',
       'simple',

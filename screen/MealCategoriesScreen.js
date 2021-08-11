@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableNativeFeedback, Alert, Dimensions, SafeAreaView, StatusBar } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableNativeFeedback, SafeAreaView, StatusBar } from 'react-native';
 import { Categoires } from '../data/dummyData';
 
 

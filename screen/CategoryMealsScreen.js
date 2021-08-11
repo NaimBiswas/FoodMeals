@@ -22,12 +22,17 @@ function CategoryMealsScreen({ route, navigation }) {
    const data = MEALS.filter(meal => meal.categoryIds.indexOf(Id) >= 0);
 
 
-   console.log(data);
 
    const renderItems = (itemData) => {
       return (
          <TouchableNativeFeedback
-            style={style.touchStyle} >
+            style={style.touchStyle}
+            onPress={() => navigation.navigate('MealDetails', {
+               id: itemData.item.id,
+               title: itemData.item.title,
+               color: BgColor
+            })}
+         >
 
             <View style={{ ...style.renderView, ...{ backgroundColor: BgColor } }}>
                <Image style={style.tinyLogo} source={{
