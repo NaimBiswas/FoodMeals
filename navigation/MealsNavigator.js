@@ -4,6 +4,7 @@ import { StatusBar, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MealCategoriesScreen from '../screen/MealCategoriesScreen';
 import CategoryMealsScreen from '../screen/CategoryMealsScreen';
@@ -12,9 +13,10 @@ import FavMealsScreen from '../screen/FavMealsScreen';
 import FilterScreen from '../screen/FilterScreen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
+import Animated from 'react-native-reanimated';
 
 const Stack = createNativeStackNavigator();
-function MealsNavigator() {
+function MealsNavigator({ navigation }) {
    return (
       <Stack.Navigator>
          <Stack.Screen name="Home" component={MealCategoriesScreen}
@@ -29,7 +31,7 @@ function MealsNavigator() {
 
                },
                headerLeft: () => (
-                  <Feather name={'align-left'} size={26} color={'#fff'} style={{ marginRight: 14 }} />
+                  <Feather name={'align-left'} size={26} color={'#fff'} style={{ marginRight: 14 }} onPress={() => navigation.toggleDrawer()} />
                ),
             }} />
 
@@ -64,82 +66,113 @@ function MealsNavigator() {
 
    );
 }
+
+// tab navigator
 const Tab = createBottomTabNavigator();
-const TabNavigator = () => {
+const TabNavigator = ({ navigation }) => {
    return (
-      <NavigationContainer>
-         <Tab.Navigator
-            screenOptions={({ route }) => ({
-               tabBarIcon: ({ focused, color, size }) => {
-                  let iconName;
 
-                  if (route.name === 'Start') {
-                     iconName = focused
-                        ? 'android1'
-                        : 'android';
-                  } else if (route.name === 'Fav') {
-                     iconName = focused ? 'heart' : 'hearto';
-                  }
 
-                  // You can return any component that you like here!
-                  return <AntDesign name={iconName} size={20} color={focused ? '#fff' : '#1A1A1A'} />;
+      <Tab.Navigator
+         screenOptions={({ route }) => ({
+            tabBarStyle: { height: 55 },
+            tabBarIcon: ({ focused, color, size }) => {
+               let iconName;
+
+               if (route.name === 'Start') {
+                  iconName = focused
+                     ? 'android1'
+                     : 'android';
+               } else if (route.name === 'Fav') {
+                  iconName = focused ? 'heart' : 'hearto';
+               }
+
+               // You can return any component that you like here!
+               return <AntDesign name={iconName} size={20} color={focused ? '#fff' : '#1A1A1A'} />;
+            },
+            tabBarActiveTintColor: '#fff',
+            tabBarInactiveTintColor: 'gray',
+            tabBarActiveBackgroundColor: '#184059',
+            tabBarInactiveBackgroundColor: '#fff',
+
+         })}
+
+
+      >
+         <Tab.Screen name="Start" component={MealsNavigator} options={{
+            headerShown: false,
+            tabBarLabelStyle: {
+               fontSize: 13,
+               fontWeight: 'bold',
+               textTransform: 'uppercase',
+               paddingBottom: 3,
+            },
+
+         }} />
+         <Tab.Screen name="Fav" component={FavMealsScreen}
+
+            options={{
+               title: 'Favourite',
+               tabBarBadge: 3,
+               headerStyle: {
+                  backgroundColor: '#f4511e',
                },
-               tabBarActiveTintColor: '#fff',
-               tabBarInactiveTintColor: 'gray',
-               tabBarActiveBackgroundColor: '#184059',
-               tabBarInactiveBackgroundColor: '#fff',
-            })}
-
-
-         >
-            <Tab.Screen name="Start" component={MealsNavigator} options={{
-               headerShown: false,
+               headerTintColor: '#fff',
+               headerTitleStyle: {
+                  fontWeight: 'bold',
+               },
                tabBarLabelStyle: {
                   fontSize: 13,
                   fontWeight: 'bold',
                   textTransform: 'uppercase',
                   paddingBottom: 3,
+
+               },
+               headerLeft: () => (
+                  <Feather onPress={() => navigation.toggleDrawer()} name={'align-left'} size={26} color={'#fff'} />
+               ),
+               headerLeftContainerStyle: {
+                  paddingLeft: 16,
                },
 
-            }} />
-            <Tab.Screen name="Fav" component={FavMealsScreen}
+            }}
 
+         />
+      </Tab.Navigator>
+
+
+   );
+};
+
+// dawer naviagtion
+const Drawer = createDrawerNavigator();
+const DwareNavigator = () => {
+
+   return (
+
+      <NavigationContainer>
+
+         <Drawer.Navigator
+         >
+            <Drawer.Screen name="Home" component={TabNavigator} options={{ headerShown: false }} />
+            <Drawer.Screen name="Filter" component={FilterScreen}
                options={{
-                  title: 'Favourite',
-                  tabBarBadge: 3,
+                  title: 'Filters',
                   headerStyle: {
                      backgroundColor: '#f4511e',
                   },
                   headerTintColor: '#fff',
                   headerTitleStyle: {
                      fontWeight: 'bold',
-                  },
-                  tabBarLabelStyle: {
-                     fontSize: 13,
-                     fontWeight: 'bold',
-                     textTransform: 'uppercase',
-                     paddingBottom: 3,
 
-                  },
-                  headerLeft: () => (
-                     <Feather name={'align-left'} size={26} color={'#fff'} />
-                  ),
-                  headerLeftContainerStyle: {
-                     paddingLeft: 16,
                   },
 
                }}
-
             />
-         </Tab.Navigator>
+         </Drawer.Navigator>
       </NavigationContainer>
    );
 };
 
 
-
-
-
-
-
-export default TabNavigator;
+export default DwareNavigator;
