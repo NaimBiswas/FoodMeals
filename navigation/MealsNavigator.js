@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -29,7 +29,7 @@ function MealsNavigator() {
 
                },
                headerLeft: () => (
-                  <Feather name={"align-left"} size={26} color={"#fff"} />
+                  <Feather name={'align-left'} size={26} color={'#fff'} style={{ marginRight: 14 }} />
                ),
             }} />
 
@@ -86,7 +86,7 @@ const TabNavigator = () => {
                },
                tabBarActiveTintColor: '#fff',
                tabBarInactiveTintColor: 'gray',
-               tabBarActiveBackgroundColor: "#184059",
+               tabBarActiveBackgroundColor: '#184059',
                tabBarInactiveBackgroundColor: '#fff',
             })}
 
@@ -97,7 +97,7 @@ const TabNavigator = () => {
                tabBarLabelStyle: {
                   fontSize: 13,
                   fontWeight: 'bold',
-                  textTransform: "uppercase",
+                  textTransform: 'uppercase',
                   paddingBottom: 3,
                },
 
@@ -112,29 +112,29 @@ const TabNavigator = () => {
                   },
                   headerTintColor: '#fff',
                   headerTitleStyle: {
-                     fontWeight: 'bold'
+                     fontWeight: 'bold',
                   },
                   tabBarLabelStyle: {
                      fontSize: 13,
                      fontWeight: 'bold',
-                     textTransform: "uppercase",
+                     textTransform: 'uppercase',
                      paddingBottom: 3,
 
                   },
                   headerLeft: () => (
-                     <Feather name={"align-left"} size={26} color={"#fff"} />
+                     <Feather name={'align-left'} size={26} color={'#fff'} />
                   ),
                   headerLeftContainerStyle: {
                      paddingLeft: 16,
-                  }
+                  },
 
                }}
 
             />
          </Tab.Navigator>
       </NavigationContainer>
-   )
-}
+   );
+};
 
 
 
