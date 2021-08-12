@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { StatusBar, View } from 'react-native';
+import { Button, StatusBar, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MealCategoriesScreen from '../screen/MealCategoriesScreen';
 import CategoryMealsScreen from '../screen/CategoryMealsScreen';
@@ -13,6 +13,7 @@ import FavMealsScreen from '../screen/FavMealsScreen';
 import FilterScreen from '../screen/FilterScreen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
+import Entypo from 'react-native-vector-icons/Entypo';
 import Animated from 'react-native-reanimated';
 
 const Stack = createNativeStackNavigator();
@@ -143,7 +144,13 @@ const TabNavigator = ({ navigation }) => {
 
    );
 };
+const CustomDawaerOption = ({ navigation }) => {
+   return (
+      <Entypo name={"cross"} size={23} color='red' />
 
+
+   )
+}
 // dawer naviagtion
 const Drawer = createDrawerNavigator();
 const DwareNavigator = () => {
@@ -153,10 +160,40 @@ const DwareNavigator = () => {
       <NavigationContainer>
 
          <Drawer.Navigator
+            screenOptions={({ route }) => ({
+
+               drawerIcon: ({ focused, color, size }) => {
+                  let iconName;
+
+                  if (route.name === 'Home') {
+                     iconName = 'home';
+                  } else if (route.name === 'Filter') {
+                     iconName = 'filter';
+                  }
+
+                  return <AntDesign name={iconName} size={23} color={focused ? 'red' : '#FFF'} />;
+               },
+               drawerStyle: {
+                  backgroundColor: '#202731'
+
+               },
+               drawerActiveBackgroundColor: "yellow",
+               drawerInactiveTintColor: "#fff",
+               drawerActiveTintColor: '#000',
+               drawerType: 'slide',
+               drawerHideStatusBarOnOpen: false,
+               drawerStatusBarAnimation: 'fade'
+            })}
          >
+
+
+
+
             <Drawer.Screen name="Home" component={TabNavigator} options={{ headerShown: false }} />
             <Drawer.Screen name="Filter" component={FilterScreen}
+
                options={{
+
                   title: 'Filters',
                   headerStyle: {
                      backgroundColor: '#f4511e',
@@ -170,7 +207,11 @@ const DwareNavigator = () => {
                }}
             />
          </Drawer.Navigator>
-      </NavigationContainer>
+
+
+
+
+      </NavigationContainer >
    );
 };
 
