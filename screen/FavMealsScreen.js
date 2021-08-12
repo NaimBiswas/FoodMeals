@@ -1,12 +1,14 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 
 function FavMealsScreen() {
    return (
-      <View>
-         <Text>Fav Screen</Text>
-      </View>
+      <SafeAreaView>
+         <View style={{ padding: 15 }}>
+            <Text>Fav Screen</Text>
+         </View>
+      </SafeAreaView>
    )
 }
 

@@ -11,34 +11,41 @@ import MealsDetailsPage from '../screen/MealsDetailsPage';
 import FavMealsScreen from '../screen/FavMealsScreen';
 import FilterScreen from '../screen/FilterScreen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 
 const Stack = createNativeStackNavigator();
 function MealsNavigator() {
    return (
       <Stack.Navigator>
-         <Stack.Screen name="Home" component={MealCategoriesScreen} options={{
-            title: 'My Home',
-            headerStyle: {
-               backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-               fontWeight: 'bold',
-            },
-         }} />
+         <Stack.Screen name="Home" component={MealCategoriesScreen}
+            options={{
+               title: 'My Home',
+               headerStyle: {
+                  backgroundColor: '#f4511e',
+               },
+               headerTintColor: '#fff',
+               headerTitleStyle: {
+                  fontWeight: 'bold',
 
-         <Stack.Screen name="Meals" component={CategoryMealsScreen} options={{
+               },
+               headerLeft: () => (
+                  <Feather name={"align-left"} size={26} color={"#fff"} />
+               ),
+            }} />
 
-            title: 'Meals',
-            headerStyle: {
-               backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-               fontWeight: 'bold',
-            },
+         <Stack.Screen name="Meals" component={CategoryMealsScreen}
+            options={{
 
-         }} />
+               title: 'Meals',
+               headerStyle: {
+                  backgroundColor: '#f4511e',
+               },
+               headerTintColor: '#fff',
+               headerTitleStyle: {
+                  fontWeight: 'bold',
+               },
+
+            }} />
 
          <Stack.Screen name="MealDetails" component={MealsDetailsPage} options={{
 
@@ -50,6 +57,7 @@ function MealsNavigator() {
             headerTitleStyle: {
                fontWeight: 'bold',
             },
+
 
          }} />
       </Stack.Navigator>
@@ -95,6 +103,7 @@ const TabNavigator = () => {
 
             }} />
             <Tab.Screen name="Fav" component={FavMealsScreen}
+
                options={{
                   title: 'Favourite',
                   tabBarBadge: 3,
@@ -112,12 +121,12 @@ const TabNavigator = () => {
                      paddingBottom: 3,
 
                   },
-                  tabBarIconStyle: {
-
+                  headerLeft: () => (
+                     <Feather name={"align-left"} size={26} color={"#fff"} />
+                  ),
+                  headerLeftContainerStyle: {
+                     paddingLeft: 16,
                   }
-
-
-
 
                }}
 
