@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import { Alert, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Alert, Image, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 
 import { MEALS } from '../data/dummyData';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import svgIcon from '../svgIcons/Heart.svg'
 
 
 
@@ -31,9 +31,9 @@ function MealsDetailsPage({ route, navigation }) {
          <Text onPress={favFun}>
             {
                AddFavList ?
-                  <AntDesign name={'heart'} size={35} color={"red"} />
+                  <AntDesign name={'heart'} size={26} color={"red"} />
                   :
-                  <AntDesign name={'hearto'} size={35} color={"#fff"} />
+                  <AntDesign name={'hearto'} size={26} color={"#fff"} />
             }
          </Text>
       ),
@@ -45,12 +45,12 @@ function MealsDetailsPage({ route, navigation }) {
 
 
    return (
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: 'gray' }}>
          <StatusBar backgroundColor={BgColor} />
 
          <View>
             <Text>
-
+               <Image style={style.HeartSVG} source={require('../svgIcons/Heart.svg')} />
                Meal Details page</Text>
          </View>
       </ScrollView>
@@ -64,7 +64,13 @@ const style = StyleSheet.create({
       padding: 5,
       paddingLeft: 10,
       paddingRight: 10,
-      borderRadius: 8
+      borderRadius: 8,
+   },
+   HeartSVG: {
+      height: 140,
+      width: 140,
+
+
    }
 })
 export default MealsDetailsPage;
