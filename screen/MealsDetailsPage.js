@@ -4,7 +4,7 @@ import { Alert, Image, ScrollView, StatusBar, StyleSheet, Text, TouchableNativeF
 
 import { MEALS } from '../data/dummyData';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import svgIcon from '../svgIcons/Heart.svg'
+
 
 
 
@@ -49,7 +49,6 @@ function MealsDetailsPage({ route, navigation }) {
 
 
    var data = MEALS.find(meals => meals.id === Id);
-   console.log(data)
 
    return (
       <ScrollView >

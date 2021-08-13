@@ -2,12 +2,11 @@
 import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather';
+import ShowRenderData from '../components/ShowRenderData';
+import { MEALS } from '../data/dummyData';
 
 function FilterScreen({ navigation }) {
-
    useEffect(() => {
-
-      // set header option 
       navigation.setOptions({
          headerLeft: () => (
             <Feather name={'align-left'} size={26} color={'#fff'} style={{ marginLeft: 16 }} onPress={() => navigation.toggleDrawer()} />
@@ -15,10 +14,18 @@ function FilterScreen({ navigation }) {
       });
 
    }, [])
+
+
+   const data = MEALS
+
+
+
+
+
+
+
    return (
-      <View>
-         <Text>Hello </Text>
-      </View>
+      <ShowRenderData data={data} navigation={navigation} />
    )
 }
 

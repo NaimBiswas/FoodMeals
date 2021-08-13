@@ -1,80 +1,57 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
-import { Button, Dimensions, FlatList, Image, Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
-
-import { MEALS } from '../data/dummyData';
+import React from 'react'
+import { FlatList, Image, StatusBar, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native'
 
 
 
-
-
-function CategoryMealsScreen({ route, navigation }) {
-   const { id, title, color } = route.params;
-   const [Title, setTitle] = useState(title);
-   const [Id, setId] = useState(id);
-   const [BgColor, setBgColor] = useState(color);
-   navigation.setOptions({
-      title: Title, headerStyle: {
-         backgroundColor: BgColor,
-      },
-   });
-
-   const data = MEALS.filter(meal => meal.categoryIds.indexOf(Id) >= 0);
-
+function ShowRenderData({ data, navigation }) {
 
    const renderItems = (itemData) => {
+
       return (
          <TouchableNativeFeedback
             style={style.touchStyle}
             onPress={() => navigation.navigate('MealDetails', {
                id: itemData.item.id,
                title: itemData.item.title,
-               color: BgColor,
+               color: '#f4511e',
             })}
          >
 
-            <View style={{ ...style.renderView, ...{ backgroundColor: BgColor } }}>
+            <View style={{ ...style.renderView, ...{ backgroundColor: 'black' } }}>
                <Image style={style.tinyLogo} source={{
                   uri: itemData.item.imageUrl,
                }} />
                <Text numberOfLines={2} style={style.renderText}>
-                  {itemData.item.title}
+                  {itemData.item?.title}
                </Text>
 
                <View style={style.CardBottom}>
                   <Text style={style.durationText}>
-                     {itemData.item.duration}m
+                     {itemData.item?.duration}m
                    </Text>
 
                   <Text style={style.affordability}>
                      {itemData.item.affordability}
                   </Text>
                   <Text style={style.complexity}>
-                     {itemData.item.complexity}
+                     {itemData.item?.complexity}
                   </Text>
-
-
                </View>
             </View>
          </TouchableNativeFeedback>
       );
    };
-
-
-
-
-
    return (
       <View>
          <StatusBar
             animated={false}
-            backgroundColor={BgColor} />
+            backgroundColor={'#f4511e'} />
          <FlatList showsVerticalScrollIndicator={false} data={data} renderItem={renderItems} />
       </View>
-
-
-   );
+   )
 }
+
 const style = StyleSheet.create({
    affordability: {
       color: '#fff',
@@ -133,4 +110,4 @@ const style = StyleSheet.create({
 
    },
 });
-export default CategoryMealsScreen;
+export default ShowRenderData
