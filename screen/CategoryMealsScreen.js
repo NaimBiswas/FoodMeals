@@ -20,7 +20,7 @@ function CategoryMealsScreen({ route, navigation }) {
    });
 
    const data = MEALS.filter(meal => meal.categoryIds.indexOf(Id) >= 0);
-
+   console.log(data)
 
 
    const renderItems = (itemData) => {
@@ -30,7 +30,7 @@ function CategoryMealsScreen({ route, navigation }) {
             onPress={() => navigation.navigate('MealDetails', {
                id: itemData.item.id,
                title: itemData.item.title,
-               color: BgColor
+               color: BgColor,
             })}
          >
 
@@ -66,10 +66,6 @@ function CategoryMealsScreen({ route, navigation }) {
 
 
    return (
-
-
-
-
       <View>
          <StatusBar
             animated={false}

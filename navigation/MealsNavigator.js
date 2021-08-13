@@ -114,10 +114,7 @@ const TabNavigator = ({ navigation }) => {
 
             options={{
                title: 'Favourite',
-               tabBarBadge: 3,
-               headerStyle: {
-                  backgroundColor: '#f4511e',
-               },
+               tabBarBadge: 4,
                headerTintColor: '#fff',
                headerTitleStyle: {
                   fontWeight: 'bold',

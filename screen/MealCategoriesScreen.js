@@ -38,7 +38,7 @@ function MealCategoriesScreen({ navigation }) {
    return (
       <SafeAreaView>
          <StatusBar
-            animated={true}
+            animated={false}
             backgroundColor="#f4511e" />
          <View >
             <FlatList showsVerticalScrollIndicator={false} numColumns={2} data={Categoires} renderItem={renderItems} />
