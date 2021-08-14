@@ -1,11 +1,20 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import {
    View, Text, SafeAreaView, TouchableNativeFeedback, Image, StatusBar, FlatList, StyleSheet
 } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux';
 import { MEALS } from '../data/dummyData';
 function FavMealsScreen({ navigation }) {
-   const datas = MEALS.filter(meal => meal.categoryIds.indexOf('c2') >= 0);
+
+
+
+
+   const datas = useSelector(state => state.mealReducer.favoriteMeals);
+
+
+
+
 
    useEffect(() => {
       navigation.setOptions({
@@ -65,7 +74,14 @@ function FavMealsScreen({ navigation }) {
          <StatusBar
             animated={false}
             backgroundColor={'#f4511e'} />
-         <FlatList showsVerticalScrollIndicator={false} data={datas} renderItem={renderItems} />
+         {
+            datas.length !== 0 ?
+               <FlatList showsVerticalScrollIndicator={false} data={datas} renderItem={renderItems} />
+               :
+               <View>
+                  <Text style={{ textAlign: 'center', marginTop: '50%', fontSize: 24, fontWeight: 'bold', color: 'red' }}>No Favorite items found</Text>
+               </View>
+         }
       </View>
 
 

@@ -1,9 +1,12 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Alert, Image, ScrollView, StatusBar, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 
-import { MEALS } from '../data/dummyData';
+// import { MEALS } from '../data/dummyData';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { toggleFavorie } from '../store/Actions/mealAction';
 
 
 
@@ -13,46 +16,52 @@ function MealsDetailsPage({ route, navigation }) {
    const [Title, setTitle] = useState();
    const [Id, setId] = useState();
    const [BgColor, setBgColor] = useState();
-   const [AddFavList, setAddFavList] = useState(false)
-
-
+   const dispatch = useDispatch()
 
    useEffect(() => {
-      setTitle(title)
-      setId(id)
-      setBgColor(color)
+      setTitle(title);
+      setId(id);
+      setBgColor(color);
 
-   }, [])
+   }, []);
+
+   const checkFavOrNot = useSelector(state => state.mealReducer.favoriteMeals.some(meal => meal.id === Id))
 
    const favFun = () => {
-      setAddFavList(pre => !pre)
-   }
+      dispatch(toggleFavorie({ id: Id }))
+
+   };
+
    navigation.setOptions({
       title: Title,
       headerStyle: {
-         backgroundColor: BgColor,
+         backgroundColor: "#121318",
       },
 
       headerRight: () => (
          <Text onPress={favFun}>
             {
-               AddFavList ?
-                  <AntDesign name={'heart'} size={26} color={"red"} />
+               checkFavOrNot ?
+                  <AntDesign name={'heart'} size={26} color={'red'} />
                   :
-                  <AntDesign name={'hearto'} size={26} color={"#fff"} />
+                  <AntDesign name={'hearto'} size={26} color={'#fff'} />
             }
          </Text>
       ),
    });
 
 
+   const allMeals = useSelector(state => state.mealReducer.meals);
 
 
-   var data = MEALS.find(meals => meals.id === Id);
+
+
+
+   var data = allMeals.find(meals => meals.id === Id);
 
    return (
       <ScrollView >
-         <StatusBar backgroundColor={BgColor} />
+         <StatusBar backgroundColor={"#121318"} />
 
          <View>
             <Image style={style.HeartSVG} source={{ uri: data?.imageUrl }} />
@@ -118,7 +127,7 @@ const style = StyleSheet.create({
 
    },
    ingredientsView: {
-      marginTop: 10
+      marginTop: 10,
    },
    renderHeaders: {
       textAlign: 'center',
@@ -165,12 +174,12 @@ const style = StyleSheet.create({
       borderRadius: 8,
    },
    HeartSVG: {
-      width: "100%",
+      width: '100%',
       height: 240,
 
 
-   }
-})
+   },
+});
 
 
 

@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import { Button, Dimensions, FlatList, Image, Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
+import { FlatList, Image, StatusBar, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import { MEALS } from '../data/dummyData';
-
+// import { MEALS } from '../data/dummyData';
 
 
 
@@ -19,7 +19,9 @@ function CategoryMealsScreen({ route, navigation }) {
       },
    });
 
-   const data = MEALS.filter(meal => meal.categoryIds.indexOf(Id) >= 0);
+   const allMeals = useSelector(state => state.mealReducer.meals)
+
+   const data = allMeals.filter(meal => meal.categoryIds.indexOf(Id) >= 0);
 
 
    const renderItems = (itemData) => {

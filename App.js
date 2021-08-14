@@ -7,7 +7,7 @@ import DwareNavigator from './navigation/MealsNavigator';
 import MealReducer from './store/Reducer/MealReducer';
 
 const rootReducer = combineReducers({
-   MealReducer: MealReducer
+   mealReducer: MealReducer
 })
 
 const store = createStore(rootReducer)

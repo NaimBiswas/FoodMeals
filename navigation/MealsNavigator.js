@@ -15,6 +15,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Animated from 'react-native-reanimated';
+import { useSelector } from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 function MealsNavigator({ navigation }) {
@@ -71,6 +72,9 @@ function MealsNavigator({ navigation }) {
 // tab navigator
 const Tab = createBottomTabNavigator();
 const TabNavigator = ({ navigation }) => {
+
+   const favMeals = useSelector(state => state.mealReducer.favoriteMeals)
+   const favMealsLength = favMeals.length
    return (
 
 
@@ -114,7 +118,7 @@ const TabNavigator = ({ navigation }) => {
 
             options={{
                title: 'Favourite',
-               tabBarBadge: 4,
+               tabBarBadge: favMealsLength,
                headerTintColor: '#fff',
                headerTitleStyle: {
                   fontWeight: 'bold',
