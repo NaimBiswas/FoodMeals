@@ -1,32 +1,132 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect } from 'react'
-import { View, Text } from 'react-native'
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, Text, Switch, StyleSheet, Alert } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
+import { CommonActions } from '@react-navigation/native';
 import ShowRenderData from '../components/ShowRenderData';
+import SwitchCom from '../components/SwitchCom';
 import { MEALS } from '../data/dummyData';
 
-function FilterScreen({ navigation }) {
+function FilterScreen({ route, navigation }) {
+   const [isGlutenFree, setIsGlutenFree] = useState(false);
+   const [isVegetarian, setVegetarian] = useState(false);
+   const [isVegan, setVegan] = useState(false);
+   const [isLactoseFree, setLactoseFree] = useState(false);
+   const [isEnable, setEnable] = useState(false);
+   const [isEnable2, setEnable2] = useState(false);
+   const [isEnable3, setEnable3] = useState(false);
+   const [isEnable4, setEnable4] = useState(false);
+
+
+   const saveFilter = useCallback(() => {
+      const data2 = {
+         isGlutenFree: isGlutenFree,
+         isLactoseFree: isLactoseFree,
+         isVegan: isVegan,
+         isVegetarian: isVegetarian,
+      };
+      navigation.setParams({ save: data2 });
+   }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]
+   );
    useEffect(() => {
+
+
       navigation.setOptions({
          headerLeft: () => (
             <Feather name={'align-left'} size={26} color={'#fff'} style={{ marginLeft: 16 }} onPress={() => navigation.toggleDrawer()} />
          ),
+         headerRight: () => (
+            <Feather name={'save'} size={26} color={'#fff'} style={{ marginRight: 18 }} onPress={saveFilter} />
+         ),
+
       });
 
-   }, [])
+   }, [navigation, saveFilter]);
 
 
-   const data = MEALS
+   const data = MEALS;
 
+   // const filterData = navigation.dispatch(CommonActions.getParams('filterData'))
+   if (route.params) {
+      const { save } = route.params;
+      console.log(save);
 
-
+   }
 
 
 
 
    return (
-      <ShowRenderData data={data} navigation={navigation} />
-   )
+      <View>
+         <Text style={style.Filtertitle}>Available filters / Restriction  </Text>
+
+
+         <SwitchCom
+            lable={'Gluten Free'}
+            isEnable={isEnable}
+            value={isGlutenFree}
+            onValueChange={(newValue) => {
+               setIsGlutenFree(newValue);
+               setEnable(newValue);
+            }} />
+
+         <SwitchCom
+            lable={'Vegetarian'}
+            isEnable={isEnable2}
+            value={isVegetarian}
+            onValueChange={(newValue) => {
+               setVegetarian(newValue);
+               setEnable2(newValue);
+            }} />
+
+
+         <SwitchCom
+            lable={'Vegan'}
+            isEnable={isEnable3}
+            value={isVegan}
+            onValueChange={(newValue) => {
+               setVegan(newValue);
+               setEnable3(newValue);
+            }} />
+
+         <SwitchCom
+            lable={'Lactose Free'}
+            isEnable={isEnable4}
+            value={isLactoseFree}
+            onValueChange={(newValue) => {
+               setLactoseFree(newValue);
+               setEnable4(newValue);
+            }} />
+
+
+
+
+         <ShowRenderData data={data} navigation={navigation} />
+      </View>
+   );
 }
 
-export default FilterScreen
+
+
+
+const style = StyleSheet.create({
+   Filtertitle: {
+      textAlign: 'center',
+      fontSize: 22, marginTop: 10, marginBottom: 10,
+   },
+   filterView: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginLeft: 15,
+      marginRight: 13,
+      marginBottom: 7,
+
+   },
+   FilterText: {
+      fontSize: 14,
+      letterSpacing: 1,
+      textTransform: 'capitalize',
+
+   },
+});
+export default FilterScreen;
