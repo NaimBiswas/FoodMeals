@@ -5,7 +5,10 @@ import Feather from 'react-native-vector-icons/Feather';
 import { CommonActions } from '@react-navigation/native';
 import ShowRenderData from '../components/ShowRenderData';
 import SwitchCom from '../components/SwitchCom';
-import { MEALS } from '../data/dummyData';
+// import { MEALS } from '../data/dummyData';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { filterFuction } from '../store/Actions/mealAction';
 
 function FilterScreen({ route, navigation }) {
    const [isGlutenFree, setIsGlutenFree] = useState(false);
@@ -18,6 +21,7 @@ function FilterScreen({ route, navigation }) {
    const [isEnable4, setEnable4] = useState(false);
 
 
+   const dispatch = useDispatch()
    const saveFilter = useCallback(() => {
       const data2 = {
          isGlutenFree: isGlutenFree,
@@ -25,12 +29,23 @@ function FilterScreen({ route, navigation }) {
          isVegan: isVegan,
          isVegetarian: isVegetarian,
       };
+
+
+      dispatch(filterFuction({
+         filter: data2
+      }))
+
       navigation.setParams({ save: data2 });
-   }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]
+   }, [dispatch, isGlutenFree, isLactoseFree, isVegan, isVegetarian, navigation]
    );
+
+
+
+
+
+
+
    useEffect(() => {
-
-
       navigation.setOptions({
          headerLeft: () => (
             <Feather name={'align-left'} size={26} color={'#fff'} style={{ marginLeft: 16 }} onPress={() => navigation.toggleDrawer()} />
@@ -43,14 +58,12 @@ function FilterScreen({ route, navigation }) {
 
    }, [navigation, saveFilter]);
 
-
-   const data = MEALS;
+   const data = useSelector(state => state.mealReducer.filteredMeals)
+   console.log(data.length);
 
    // const filterData = navigation.dispatch(CommonActions.getParams('filterData'))
    if (route.params) {
       const { save } = route.params;
-      console.log(save);
-
    }
 
 
@@ -59,7 +72,6 @@ function FilterScreen({ route, navigation }) {
    return (
       <View>
          <Text style={style.Filtertitle}>Available filters / Restriction  </Text>
-
 
          <SwitchCom
             lable={'Gluten Free'}
@@ -101,6 +113,7 @@ function FilterScreen({ route, navigation }) {
 
 
 
+
          <ShowRenderData data={data} navigation={navigation} />
       </View>
    );
@@ -115,7 +128,7 @@ const style = StyleSheet.create({
       fontSize: 22, marginTop: 10, marginBottom: 10,
    },
    filterView: {
-      flexDirection: 'row',
+      flex: 1,
       justifyContent: 'space-between',
       marginLeft: 15,
       marginRight: 13,

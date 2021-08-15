@@ -95,8 +95,7 @@ const style = StyleSheet.create({
 
    },
    renderView: {
-      display: 'flex',
-      flex: 1,
+
       margin: 10,
       borderRadius: 10,
       shadowColor: 'black',

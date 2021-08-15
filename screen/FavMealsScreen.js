@@ -19,7 +19,7 @@ function FavMealsScreen({ navigation }) {
    useEffect(() => {
       navigation.setOptions({
          headerStyle: {
-            backgroundColor: '#f4511e'
+            backgroundColor: '#1A1A1A'
          }
       })
    }, [])
@@ -34,7 +34,7 @@ function FavMealsScreen({ navigation }) {
             onPress={() => navigation.navigate('MealDetails', {
                id: itemData.item.id,
                title: itemData.item.title,
-               color: '#f4511e',
+               color: 'black',
             })}
          >
 
@@ -73,7 +73,7 @@ function FavMealsScreen({ navigation }) {
       <View>
          <StatusBar
             animated={false}
-            backgroundColor={'#f4511e'} />
+            backgroundColor={'#1A1A1A'} />
          {
             datas.length !== 0 ?
                <FlatList showsVerticalScrollIndicator={false} data={datas} renderItem={renderItems} />
