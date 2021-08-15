@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-import { FlatList, Image, StatusBar, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native'
+import { FlatList, Image, SafeAreaView, StatusBar, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native'
 
 
 
@@ -47,8 +47,11 @@ function ShowRenderData({ data, navigation }) {
          <StatusBar
             animated={false}
             backgroundColor={'#f4511e'} />
-         <FlatList showsVerticalScrollIndicator={false} data={data} renderItem={renderItems} />
+         <FlatList showsVerticalScrollIndicator={false}
+            data={data}
+            renderItem={renderItems} />
       </View>
+
    )
 }
 
